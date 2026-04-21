@@ -14,27 +14,18 @@
     --blue-mid:  oklch(0.48 0.16 var(--blue-h));
     --blue-bright: oklch(0.64 0.18 var(--blue-h));
     --blue-glow: oklch(0.72 0.12 var(--blue-h));
-
     --paper: oklch(0.985 0.003 85);
     --ink:   oklch(0.20 0.015 260);
     --ink-soft: oklch(0.45 0.015 260);
     --rule:  oklch(0.78 0.008 260);
     --bg:    #17181c;
-
     --ff-display: "Newsreader", "Times New Roman", serif;
     --ff-body:    "Inter Tight", system-ui, sans-serif;
     --ff-mono:    "JetBrains Mono", ui-monospace, monospace;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body {
-    background: var(--paper);
-    font-family: var(--ff-body);
-    color: var(--ink);
-    min-height: 100vh;
-  }
-
+  body { background: var(--paper); font-family: var(--ff-body); color: var(--ink); min-height: 100vh; }
   .hero { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 24px 40px; position: relative; overflow: hidden; }
   .hero-content { position: relative; z-index: 1; text-align: center; max-width: 680px; }
   .kicker { font-family: var(--ff-body); font-size: 11px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 20px; }
@@ -68,8 +59,8 @@
   .form-group input:focus, .form-group textarea:focus { border-color: var(--blue-mid); }
   .form-group textarea { resize: vertical; min-height: 70px; }
   .form-group input::placeholder, .form-group textarea::placeholder { color: var(--rule); font-style: italic; }
-  .radio-group { display: flex; gap: 12px; }
-  .radio-option { flex: 1; position: relative; }
+  .radio-group { display: flex; flex-wrap: wrap; gap: 12px; }
+  .radio-option { flex: 1; min-width: 140px; position: relative; }
   .radio-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
   .radio-option .radio-label { display: flex; align-items: center; justify-content: center; padding: 12px 16px; font-family: var(--ff-body); font-size: 13px; font-weight: 500; letter-spacing: 0.06em; color: var(--ink-soft); background: #fff; border: 1px solid var(--rule); border-radius: 2px; cursor: pointer; transition: all 0.2s; }
   .radio-option input[type="radio"]:checked + .radio-label { color: #fff; border-color: var(--blue-deep); background: var(--blue-deep); }
@@ -105,7 +96,7 @@
       <p class="rsvp-subtitle">Please let us know if you can make it</p>
       <form id="rsvpForm">
         <div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="entry.1916272587" placeholder="First and last name" required /></div>
-        <div class="form-group"><label>Will You Attend?</label><div class="radio-group"><div class="radio-option"><input type="radio" id="attend-yes" name="entry.176707196" value="Yes" required /><label for="attend-yes" class="radio-label">Yes, I'll be there</label></div><div class="radio-option"><input type="radio" id="attend-no" name="entry.176707196" value="No" /><label for="attend-no" class="radio-label">Can't make it</label></div></div></div>
+        <div class="form-group"><label>Will You Attend?</label><div class="radio-group"><div class="radio-option"><input type="radio" id="attend-yes" name="entry.176707196" value="Yes, I'll be there" required /><label for="attend-yes" class="radio-label">Yes, I'll be there</label></div><div class="radio-option"><input type="radio" id="attend-zoom" name="entry.176707196" value="I'll join on Zoom" /><label for="attend-zoom" class="radio-label">I'll join on Zoom</label></div><div class="radio-option"><input type="radio" id="attend-no" name="entry.176707196" value="Can't make it" /><label for="attend-no" class="radio-label">Can't make it</label></div></div></div>
         <div class="form-group guest-fields" id="guestFields"><label for="guests">Guests You're Bringing</label><textarea id="guests" name="entry.1962770215" placeholder="Enter guest names, one per line (or leave blank if none)"></textarea><p class="guest-hint">Optional — list anyone joining you</p></div>
         <button type="submit" class="submit-btn">Submit RSVP</button>
       </form>
@@ -115,10 +106,12 @@
 <script>
 (function() {
   const yesRadio = document.getElementById('attend-yes');
+  const zoomRadio = document.getElementById('attend-zoom');
   const noRadio = document.getElementById('attend-no');
   const guestFields = document.getElementById('guestFields');
-  function toggleGuests() { if (yesRadio.checked) { guestFields.classList.add('visible'); } else { guestFields.classList.remove('visible'); } }
+  function toggleGuests() { if (yesRadio.checked || zoomRadio.checked) { guestFields.classList.add('visible'); } else { guestFields.classList.remove('visible'); } }
   yesRadio.addEventListener('change', toggleGuests);
+  zoomRadio.addEventListener('change', toggleGuests);
   noRadio.addEventListener('change', toggleGuests);
   const form = document.getElementById('rsvpForm');
   const success = document.getElementById('formSuccess');
