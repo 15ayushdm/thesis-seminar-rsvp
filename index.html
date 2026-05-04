@@ -96,6 +96,11 @@
       <p class="rsvp-subtitle">Please let us know if you can make it</p>
       <form id="rsvpForm">
         <div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="entry.1916272587" placeholder="First and last name" required /></div>
+
+        <div class="form-group">
+          <label for="email">Email Address <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;font-style:italic">(for calendar invite)</span></label>
+          <input type="email" id="email" name="entry.1336834249" placeholder="you@example.com" required />
+        </div>
         <div class="form-group"><label>Will You Attend?</label><div class="radio-group"><div class="radio-option"><input type="radio" id="attend-yes" name="entry.176707196" value="Yes, I'll be there" required /><label for="attend-yes" class="radio-label">Yes, I'll be there</label></div><div class="radio-option"><input type="radio" id="attend-zoom" name="entry.176707196" value="I'll join on Zoom" /><label for="attend-zoom" class="radio-label">I'll join on Zoom</label></div><div class="radio-option"><input type="radio" id="attend-no" name="entry.176707196" value="Can't make it" /><label for="attend-no" class="radio-label">Can't make it</label></div></div></div>
         <div class="form-group guest-fields" id="guestFields"><label for="guests">Guests You're Bringing</label><textarea id="guests" name="entry.1962770215" placeholder="Enter guest names, one per line (or leave blank if none)"></textarea><p class="guest-hint">Optional — list anyone joining you</p></div>
         <button type="submit" class="submit-btn">Submit RSVP</button>
